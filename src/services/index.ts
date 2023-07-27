@@ -3,6 +3,7 @@ import { useManagerStore } from '@/stores/manager'
 import router from '../router'
 import { Auth } from './auth'
 import { User } from './user'
+import { Drink } from './drink'
 
 const httpClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL
@@ -42,5 +43,6 @@ httpClient.interceptors.response.use(
 
 export default {
   auth: new Auth(httpClient),
-  user: new User(httpClient)
+  user: new User(httpClient),
+  drink: new Drink(httpClient)
 }
