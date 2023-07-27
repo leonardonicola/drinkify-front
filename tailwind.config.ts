@@ -1,12 +1,17 @@
 import type { Config } from 'tailwindcss'
+import daisyui from 'daisyui'
 
 export default {
-  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  content: [
+    './index.html',
+    './src/**/*.{vue,js,ts,jsx,tsx}',
+    './cypress/support/component-index.html'
+  ],
   theme: {
     extend: {}
   },
-  plugins: [require('daisyui')],
+  plugins: [daisyui],
   daisyui: {
-    themes: ["halloween"]
+    themes: ['light']
   }
 } satisfies Config
