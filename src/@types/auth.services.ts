@@ -1,13 +1,5 @@
 import type { UserProtocol } from './user.interface'
-
-export type ErrorProtocol = {
-  status: number
-  statusText: string
-}
-
-interface ResponseProtocol {
-  errors: ErrorProtocol | null
-}
+import type { ResponseProtocol } from './errors.interface'
 
 type AcessToken = {
   access_token: string
