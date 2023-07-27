@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
 import services from '@/services'
 import { useUserStore } from '@/stores/user'
 
@@ -9,7 +8,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: () => import('@/views/Home.vue')
     },
     {
       path: '/login',
@@ -29,12 +28,15 @@ const router = createRouter({
 
 router.beforeEach(async (to, _from, next) => {
   const store = useUserStore()
-  const token = window.localStorage.getItem('token')
-
+  const token = localStorage.getItem('token')
 
   if (token && !store.currentUser) {
     const user = await services.user.getMe()
-    store.setCurrentUser(user)
+    if (user.errors) {
+      store.clearCurrentUser()
+      next({ name: 'login' })
+    }
+    store.setCurrentUser(user.data)
   }
 
   if (to.meta.hasAuth) {
