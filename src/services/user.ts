@@ -1,3 +1,4 @@
+import makeResponsePayload from '@/utils/makeResponsePayload'
 import type { AxiosInstance } from 'axios'
 
 export class User {
@@ -5,6 +6,6 @@ export class User {
 
   async getMe() {
     const response = await this.httpClient.get('/me')
-    return response.data
+    return makeResponsePayload(response)
   }
 }

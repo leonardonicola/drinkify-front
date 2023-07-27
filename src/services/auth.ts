@@ -1,9 +1,9 @@
 import type {
   AuthProtocol,
-  ErrorProtocol,
   LoginResponseProtocol,
   RegisterResponseProtocol
 } from '@/@types/auth.services'
+import makeResponsePayload from '@/utils/makeResponsePayload'
 import type { AxiosInstance } from 'axios'
 
 export class Auth implements AuthProtocol {
@@ -23,19 +23,7 @@ export class Auth implements AuthProtocol {
       email,
       password
     })
-    let errors: ErrorProtocol | null = null
-
-    if (!response.data) {
-      errors = {
-        status: response.request.status,
-        statusText: response.request.statusText
-      }
-    }
-
-    return {
-      data: response.data,
-      errors
-    }
+    return makeResponsePayload(response)
   }
 
   async login({
@@ -50,18 +38,6 @@ export class Auth implements AuthProtocol {
       password
     })
 
-    let errors: ErrorProtocol | null = null
-
-    if (!response.data) {
-      errors = {
-        status: response.request.status,
-        statusText: response.request.statusText
-      }
-    }
-
-    return {
-      data: response.data,
-      errors
-    }
+    return makeResponsePayload(response)
   }
 }
